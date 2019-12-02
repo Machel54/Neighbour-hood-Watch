@@ -1,6 +1,16 @@
-.double-nav .breadcrumb-dn {
-    color: #fff;
+.card-title h3{
+  font-weight: 600;
+  color: #000000;
+  padding-top: 20px;
 }
-.side-nav.wide.slim .sn-ad-avatar-wrapper a span {
-  display: none;
+
+.card-text label{   
+  color: black;
+  font-weight: bolder;
+}
+
+.card-text .btn{
+  color: #fff;
+  background-color: #000000;
+  border-radius: 20px;
 }
