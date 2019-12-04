@@ -4,8 +4,7 @@ from .forms import *
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
-# def welcome(request):
-#     return render(request, 'index.html')
+
 
 @login_required(login_url='/login')
 def index(request):
@@ -44,7 +43,7 @@ def create_profile(request):
         user_form = UserUpdateForm(request.POST, instance=request.user)
         profile_form = ProfileUpdateForm(request.POST,
                                    request.FILES, instance=request.user.profile)
-        if user_form.is_valid() and p_form.is_valid():
+        if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
             return redirect('/profile/')
@@ -102,7 +101,7 @@ def notices(request):
     return render(request, 'notices.html', {"notices": alerts, "form": form})
 
 @login_required(login_url='/login')
-def establishment(request):
+def establishments(request):
     user = Profile.objects.get(user=request.user.id)
     neccesities = Establishment.objects.all().filter(hood=user.hood)
     current_user = request.user
@@ -114,7 +113,7 @@ def establishment(request):
             image.author = current_user
             image.hood = hood
             image.save()
-            return redirect('/establishment/')
+            return redirect('/establishments/')
     else:
         form = AddEstablishment(auto_id=False)
-    return render(request, 'establishment.html', {"establishment": neccesities, "form": form})  
+    return render(request, 'establishment.html', {"establishments": neccesities, "form": form})  

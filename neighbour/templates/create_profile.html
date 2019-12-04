@@ -1,7 +1,6 @@
 {% extends 'all-neighbour/base.html'%}
 {% load bootstrap4 %}
 {% load static %}
-{% load crispy_forms_tags %} 
 {% block title%}
 <title>Create Profile</title>
 {% endblock %}
@@ -22,9 +21,8 @@
         margin: 50px auto;
     }
     .col-md-8{
-        background-image: url("https://images.wallpaperscraft.com/image/girl_profile_vector_23752_1920x1080.jpg");
+        background-image: url("https://images.pexels.com/photos/2914265/pexels-photo-2914265.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
         background-size:cover;
-        background-color: #5f6769;
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
@@ -39,7 +37,7 @@
         padding-top:10em;
     }
     h1{
-        color:#fff;
+        color:#0000;
         font-size:60px;
         font-family: 'Srisakdi', cursive;
         top:50%;
@@ -49,7 +47,7 @@
         text-decoration:underline;
     }
     a{
-        color: white;
+        color: black;
     }
 </style>
 <script>
@@ -108,7 +106,7 @@
             <h1> <strong>
                 <a href="" class="typewrite" data-period="2000"
                    data-type='[ "Hello, {{user.username|capfirst}}.",
-                        "Welcome to Know my hood.",
+                        "Welcome to Neighbour hood watch.",
                         "Create your profile.",
                         "Get to know your hood!" ]'>
                     <span class="wrap"></span>
@@ -121,9 +119,9 @@
             <form action="{% url 'create_profile' %}" class="form-group mt-1" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="form-group">
-                    {{u_form|crispy}}
-                    {{p_form|crispy}}
-                    <button type="submit" class="btn btn-outline-info ">Submit</button>
+                    {% bootstrap_form user_form %}
+                    {% bootstrap_form profile_form %}
+                    <button type="submit" class="btn btn-info ">Submit</button>
                 </div>
             </form>
         </div>
