@@ -5,12 +5,11 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
-
-@login_required(login_url='/login')
+@login_required(login_url='/accounts/login/')
 def index(request):
     title = "Neighbourhood"
-    user = Profile.objects.get(user=request.user.id)
-    business = Business.objects.all().filter(hood=user.hood)
+    
+    business = Business.objects.all()
     context = {
         "title": title,
         "business": business
@@ -27,7 +26,7 @@ def register(request):
         form = RegisterForm()
     return render(request, 'registration/registration_form.html', {"form": form})
 
-@login_required(login_url='/login')
+@login_required(login_url='/accounts/login/')
 def profile(request):
     user = request.user
     context = {
@@ -37,7 +36,7 @@ def profile(request):
 
 
 
-@login_required(login_url='/login')
+@login_required(login_url='/accounts/login/')
 def create_profile(request):
     if request.method == 'POST':
         user_form = UserUpdateForm(request.POST, instance=request.user)
@@ -68,7 +67,7 @@ def search_results(request):
         message = "Search for a business by its name"
         return render(request, 'search.html', {"message": message})
     
-@login_required(login_url='/login')
+@login_required(login_url='/accounts/login/')
 def post_business(request):
     current_user = request.user
     if request.method == 'POST':
@@ -82,7 +81,7 @@ def post_business(request):
         form = PostBusinessForm(auto_id=False)
     return render(request, 'add_business.html', {"form": form})  
 
-@login_required(login_url='/login')
+@login_required(login_url='/accounts/login/')
 def notices(request):
     user = Profile.objects.get(user=request.user.id)
     alerts = Notices.objects.all().filter(hood=user.hood)
@@ -100,7 +99,7 @@ def notices(request):
         form = PostNotice(auto_id=False)
     return render(request, 'notices.html', {"notices": alerts, "form": form})
 
-@login_required(login_url='/login')
+@login_required(login_url='/accounts/login/')
 def establishments(request):
     user = Profile.objects.get(user=request.user.id)
     neccesities = Establishment.objects.all().filter(hood=user.hood)
